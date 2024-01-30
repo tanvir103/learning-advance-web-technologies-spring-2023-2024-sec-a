@@ -15,3 +15,19 @@ const greetnew=function(name){
     console.log(`Hello, ${name}!`);
 };
 greetnew("Fahim");
+
+
+function operationOnNumber(a,b,operation){
+    return operation(a,b);
+}
+function add(x,y){
+    return x+y;
+}
+function multiply(x,y){
+    return x*y;
+}
+
+let resultadd=operationOnNumber(5,9,add);
+let resultmulitiplication=operationOnNumber(5,9,multiply);
+console.log(resultadd);
+console.log(resultmulitiplication);
