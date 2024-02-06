@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var student_1 = require("./student");
+var teacher_1 = require("./teacher");
+var student1 = new student_1.student("21-44589-1", "Rianul Amin");
+student1.showDetails();
+var teacher1 = new teacher_1.teacher("21-44626-1", "Tanvir Hasan Tamal");
+teacher1.showDetails();
+var course1 = teacher1.createCourse("C-01", "ATP-3", "A");
+var course2 = teacher1.createCourse("C-02", "OOP-2", "D");
+student1.addCourse(course1, student1);
+student1.addCourse(course2, student1);
+student1.showAllCourses();
+course1.showCourseDetails();
