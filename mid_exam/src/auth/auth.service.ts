@@ -41,22 +41,16 @@ export class AuthService {
 
     async signin(signinDto: SigninDTO, @Res() res: Response){
         const {email, password} = signinDto
-        const user = await this.userRepo.findOneBy({
-            email,
-        })
-
-        if(user && await user.checkPassword(password)){
-            res.cookie('auth', randomUUID(), {
-                maxAge: 99999999999 //expire time
-            })
+        const user = await this.userRepo.findOne({where:{email:email}})
+        if(user==null){return "No user Found";}
+        const spass=await bcrypt.hash(password,user.salt);
+        if(spass==user.password){
+            res.cookie('user', randomUUID(),{maxAge: 999999})
             return {
-                status : "Sign in successfull",
-                role: Role[user.role]
+                status : "Sign in successfull",role: Role[user.role]
             }
         }
-        else {
-            return "Invalid credentials"
-        }
+            return {status:"Invalid credentials"}
         
     }
 }

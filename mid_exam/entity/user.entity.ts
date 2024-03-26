@@ -27,10 +27,4 @@ export class UserEntity{
 
     @Column({nullable:false})
     role:Role;
-
-
-  async checkPassword(password){
-    const res = await bcrypt.hash(password, this.salt);
-    return res === this.password;
-}
 }

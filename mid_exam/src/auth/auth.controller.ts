@@ -8,23 +8,23 @@ import { Request, Response } from 'express';
 export class AuthController {
     constructor(private readonly authService:AuthService){}
 
-    @Post('/create')
+    @Post('create')
     createUser(@Body()user:UserDTO){
         this.authService.signup(user);
     }
-    @Post('/signin')
+    @Post('signin')
     @UsePipes(ValidationPipe)
     async signin(@Body() signinDto: SigninDTO, @Res({passthrough: true}) res: Response){
         return this.authService.signin(signinDto, res)
     }
 
-    @Post('/logout')
+    @Post('logout')
     async logout(@Req() req: Request, @Res({passthrough: true}) res: Response){
-        if(req.cookies.auth) {
+        if(req.cookies.user) {
             res.clearCookie('auth')
-            return 'logout successfull'
+            return 'logout successfull';
         }
-        return 'please login first.'
+        return 'please login first.';
     }
     
 }
